@@ -1,30 +1,53 @@
-Calculator.java
-public class Calculator {
-    public int add(int a, int b) {
-        return a + b;
-    }
-    public int divide(int a, int b) {
-        if (b == 0)
-            throw new IllegalArgumentException("Division by zero");
-        return a / b;
+import java.util.*;
+abstract class Vehicle {
+    abstract int calculateFare(int distance);
+}
+class Bike extends Vehicle {
+    int calculateFare(int distance) {
+        return distance * 5;
     }
 }
-task 9.2
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.Test;
-class CalculatorTest {
-    Calculator cal = new Calculator();
-    @Test
-    void testAddition() {
-        assertEquals(30, cal.add(10, 20));
+class Cab extends Vehicle {
+    int calculateFare(int distance) {
+        return distance * 12;
     }
-    @Test
-    void testDivision() {
-        assertEquals(5, cal.divide(20, 4));
+}
+class Auto extends Vehicle {
+    int calculateFare(int distance) {
+        return distance * 12;
     }
-    @Test
-    void testDivideByZero() {
-        assertThrows(IllegalArgumentException.class,
-                () -> cal.divide(10, 0));
+}
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt()
+        for (int i = 0; i < N; i++) {
+            String type = sc.next();
+            int distance = sc.nextInt();
+            try {
+                if (distance <= 0) {
+                    throw new IllegalArgumentException();
+                }
+                Vehicle v;
+                switch (type) {
+                    case "Bike":
+                        v = new Bike();
+                        break;
+                    case "Cab":
+                        v = new Cab();
+                        break;
+                    case "Auto":
+                        v = new Auto();
+                        break;
+                    default:
+                        throw new IllegalArgumentException();
+                }
+                System.out.println(v.calculateFare(distance));
+            } catch (IllegalArgumentException e) {
+                System.out.println("Invalid Booking");
+            }
+        }
+
+        sc.close();
     }
 }
