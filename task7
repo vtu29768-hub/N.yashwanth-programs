@@ -1,0 +1,28 @@
+import java.util.*;
+
+public class HashtagFrequencyCounter {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // Read the number of hashtags
+        int N = sc.nextInt();
+
+        // HashMap to store hashtag and its frequency
+        HashMap<String, Integer> frequency = new HashMap<>();
+
+        // Read N hashtags
+        for (int i = 0; i < N; i++) {
+            String hashtag = sc.next();
+
+            // Increase frequency by 1
+            frequency.put(hashtag, frequency.getOrDefault(hashtag, 0) + 1);
+        }
+
+        // Display hashtag frequencies
+        for (Map.Entry<String, Integer> entry : frequency.entrySet()) {
+            System.out.println(entry.getKey() + " " + entry.getValue());
+        }
+
+        sc.close();
+    }
+}
